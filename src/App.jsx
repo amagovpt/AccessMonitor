@@ -14,8 +14,8 @@ import PageCode from "./pages/PageCode";
 import Error from "./pages/Error";
 
 // export const pathURL = process.env.REACT_APP_DEV_SERVER_URL;
-export const pathURL = process.env.REACT_APP_PPR_SERVER_URL;
-//export const pathURL = process.env.REACT_APP_PRD_SERVER_URL;
+// export const pathURL = process.env.REACT_APP_PPR_SERVER_URL;
+export const pathURL = process.env.REACT_APP_PRD_SERVER_URL;
 
 export default function App() {
   const [allData, setAllData] = useState([]);

@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Breadcrumb, Gauge, LoadingComponent, StatsTable, TableComponent } from "ama-design-system";
 
-import { api } from "../../config/api";
+// Api
+import { getEvalData } from "../../config/api";
+
 import { processData } from "../../services";
 import { ButtonsActions } from "./_components/buttons-revalidation";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
@@ -31,12 +33,6 @@ export default function Resume({ setAllData, setEle }) {
   const { theme } = useContext(ThemeContext);
   const themeClass = theme === "light" ? "" : "dark_mode-resume";
 
-  const removeProtocol = (url) => {
-    return url.replace(/^(https?:\/\/)?(www\.)?/, "");
-  };
-
-  const decodedUrl = removeProtocol(content);
-
   useEffect(() => {
     const fetchData = async () => {
       setLoadingProgress(true);
@@ -45,7 +41,7 @@ export default function Resume({ setAllData, setEle }) {
         const storedData = localStorage.getItem("evaluation");
         const storedUrl = localStorage.getItem("evaluationUrl");
 
-        const currentUrl = content === "html" ? contentHtml : decodedUrl;
+        const currentUrl = content === "html" ? contentHtml : content;
 
         if (storedData && storedUrl === currentUrl) {
           const parsedStoredData = JSON.parse(storedData);
@@ -58,11 +54,8 @@ export default function Resume({ setAllData, setEle }) {
 
           return;
         }
-
-        const response =
-          content === "html"
-            ? await api.post("/eval/html", { html: contentHtml })
-            : await api.get(`/eval/${decodedUrl}`);
+        
+        const response = await getEvalData(content, currentUrl);
 
 
         if (content !== "html") {
@@ -84,7 +77,7 @@ export default function Resume({ setAllData, setEle }) {
     };
 
     fetchData();
-  }, [content, contentHtml, decodedUrl]);
+  }, [content, contentHtml]);
 
   const reRequest = () => {
     if (content === "html") {

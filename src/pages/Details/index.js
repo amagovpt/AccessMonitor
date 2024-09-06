@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../../context/ThemeContext";
 import { Breadcrumb, Icon, LoadingComponent } from "ama-design-system";
 
-import { api } from "../../config/api";
+// Api
+import { getEvalData } from "../../config/api";
 
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
@@ -28,12 +29,13 @@ export default function Details({ allData, setAllData }) {
 
   const themeClass = theme === "light" ? "" : "dark_mode-details";
 
+  const url = allData?.rawUrl;
   const handleGoBack = () => {
     const test = location.pathname.split("/")
-    navigate(`${pathURL}results/${test[3]}`);
+
+    navigate(`${pathURL}results/${test[test.length-2]}`);
   };
 
-  const url = allData?.rawUrl;
   const textHeading = t(`ELEMS.${details}`);
   const [dataTable, setDataTable] = useState([]);
 
@@ -54,10 +56,6 @@ export default function Details({ allData, setAllData }) {
     },
   ];
 
-  const removeProtocol = (url) => {
-    return url.replace(/^(https?:\/\/)?(www\.)?/, "");
-  };
-
   function getDetailsData(data, tt) {
     const response = getTestResults(details, data, tt);
     setDataTable(response);
@@ -75,8 +73,10 @@ export default function Details({ allData, setAllData }) {
         }
         const storedData = localStorage.getItem("evaluation");
         const storedUrl = localStorage.getItem("evaluationUrl");
-        const url = location.pathname.split("/")[3]
-        const currentUrl = removeProtocol(url.split("%2F")[2])
+        const test = location.pathname.split("/")
+        let url = test[test.length-2]
+        
+        const currentUrl = decodeURIComponent(url)
 
         if (storedData && storedUrl === currentUrl) {
           const parsedStoredData = JSON.parse(storedData);
@@ -86,18 +86,18 @@ export default function Details({ allData, setAllData }) {
           setLoadingProgress(false);
           return;
         }
-        const response = await api.get(`/eval/${currentUrl}`)
+        const response = await getEvalData(false, currentUrl);
+
         if (url !== "html") {
           localStorage.setItem("evaluation", JSON.stringify(response.data));
           localStorage.setItem("evaluationUrl", currentUrl);
         }
-
+        
         tot2 = response?.data?.result?.data.tot;
         setAllData(response.data?.result?.data);
         getDetailsData(response.data?.result?.data);
         setLoadingProgress(false);
       } catch (error) {
-        console.error("Erro", error);
         setLoadingProgress(false);
       }
     };

@@ -3,7 +3,8 @@ import "./styles.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Breadcrumb, LoadingComponent } from 'ama-design-system'
 import { processData } from "../../services";
-import { api } from "../../config/api";
+// Api
+import { getEvalData } from "../../config/api";
 
 import { useTranslation } from "react-i18next";
 import { useContext, useState, useEffect } from "react";
@@ -33,11 +34,8 @@ export default function Resume() {
 
   const handleGoBack = () => {
     const test = location.pathname.split("/")
-    navigate(`${pathURL}results/${test[3]}`);
-  };
 
-  const removeProtocol = (url) => {
-    return url.replace(/^(https?:\/\/)?(www\.)?/, "");
+    navigate(`${pathURL}results/${test[test.length-2]}`);
   };
 
   useEffect(() => {
@@ -54,8 +52,9 @@ export default function Resume() {
         }
         const storedData = localStorage.getItem("evaluation");
         const storedUrl = localStorage.getItem("evaluationUrl");
-        const url = location.pathname.split("/")[3]
-        const currentUrl = removeProtocol(url.split("%2F")[2])
+        const test = location.pathname.split("/")
+        let url = test[test.length-2]
+        const currentUrl = decodeURIComponent(url)
         if (storedData && storedUrl === currentUrl) {
           const parsedStoredData = JSON.parse(storedData);
           setOriginalData(parsedStoredData);
@@ -64,7 +63,7 @@ export default function Resume() {
           setLoadingProgress(false);
           return;
         }
-        const response = await api.get(`/eval/${currentUrl}`)
+        const response = await getEvalData(false, currentUrl);
         if (url !== "html") {
           localStorage.setItem("evaluation", JSON.stringify(response.data));
           localStorage.setItem("evaluationUrl", currentUrl);

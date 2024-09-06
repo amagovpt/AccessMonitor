@@ -1,9 +1,9 @@
 .container_error {
-    height: 30vh; /* This ensures the container takes up the full height of the viewport */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .container_error a {

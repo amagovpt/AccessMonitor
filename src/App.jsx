@@ -1,5 +1,6 @@
 import "./styles/theme.css";
 import "./styles/fontStyle.css";
+import "./styles/main.css";
 
 import { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";

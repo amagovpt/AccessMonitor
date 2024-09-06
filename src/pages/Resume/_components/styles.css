@@ -94,29 +94,37 @@
 .dark_mode-resume .deskGroupMobile button,
 .dark_mode-resume .group_mobile button {
   background-color: var(--ama-color-text-blue) !important;
-  border-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter);
+}
+
+.dark_mode-resume .deskGroupMobile button:not(:focus),
+.dark_mode-resume .group_mobile button:not(:focus) {
+  border-color: var(--ama-color-text-blue);
 }
 
 .dark_mode-resume .deskGroupMobile button:active,
 .dark_mode-resume .group_mobile button:active {
   background-color: var(--ama-color-text-blue) !important;
-  border-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter) !important;
 }
 
 .dark_mode-resume .deskGroupMobile button:hover,
 .dark_mode-resume .group_mobile button:hover {
   background-color: transparent !important;
-  border-color: var(--ama-color-text-blue) !important;
+  border-color: var(--ama-color-text-blue);
   color: var(--ama-color-text-blue);
 }
 
 .dark_mode-resume .other button {
   background-color: var(--ama-color-background-dark-lighter) !important;
-  border-color: var(--ama-color-background-dark-lighter) !important;
+
   color: var(--ama-color-text-blue);
 }
+
+.dark_mode-resume .other button:not(:focus) {
+  border-color: var(--ama-color-background-dark-lighter);
+}
+
 
 .dark_mode-resume .dropdown-content {
   width: fit-content;
@@ -127,6 +135,5 @@
 .dark_mode-resume .dropdown-content li button,
 .dark_mode-resume .dropdown-content a {
   background-color: var(--ama-color-text-blue) !important;
-  border-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter);
 }

@@ -12,6 +12,7 @@
   margin-right: 10px;
   position: absolute;
   z-index: 10;
+  min-width: 130px;
 }
 
 .input-group .btn:hover {
@@ -27,14 +28,14 @@
   margin-bottom: 15px;
 }
 
-input[type=file].form-control::file-selector-button {
+/* input[type=file].form-control::file-selector-button {
   display: none;
-}
+} */
 
 input[type=file] {
   margin-bottom: 0px;
-  margin-left: 100px !important;
-  padding-left: 90px;
+  padding-left: 0px;
+  margin-left: 30px !important;
   border: 2px solid var(--ama-color-brand-primary) !important;
   border-radius: 0;
 }

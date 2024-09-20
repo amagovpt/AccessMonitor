@@ -14,6 +14,8 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 import { tot } from '../Resume'
 
+import LZString from 'lz-string';
+
 import { pathURL } from "../../App";
 
 export let tot2;
@@ -26,14 +28,25 @@ export default function Details({ allData, setAllData }) {
   const { theme } = useContext(ThemeContext);
 
   const [loadingProgress, setLoadingProgress] = useState(true);
+  const [error, setError] = useState(false);
+
+  const contentHtml = location.state?.contentHtml || null;
 
   const themeClass = theme === "light" ? "" : "dark_mode-details";
 
   const url = allData?.rawUrl;
-  const handleGoBack = () => {
-    const test = location.pathname.split("/")
 
-    navigate(`${pathURL}results/${test[test.length-2]}`);
+  const handleGoBack = () => {
+    if(!url) {
+      navigate(`${pathURL}results/html`, {
+        state: {
+          contentHtml: contentHtml
+        },
+      })
+    } else {
+      const test = location.pathname.split("/")
+      navigate(`${pathURL}results/${test[test.length-2]}`);
+    }
   };
 
   const textHeading = t(`ELEMS.${details}`);
@@ -49,7 +62,6 @@ export default function Details({ allData, setAllData }) {
       title: url || "html",
       href: "",
     },
-
     {
       title: textHeading,
       href: "#",
@@ -71,7 +83,8 @@ export default function Details({ allData, setAllData }) {
           setLoadingProgress(false);
           return;
         }
-        const storedData = localStorage.getItem("evaluation");
+        const compressedData = localStorage.getItem("evaluation");
+        const storedData = LZString.decompressFromUTF16(compressedData);
         const storedUrl = localStorage.getItem("evaluationUrl");
         const test = location.pathname.split("/")
         let url = test[test.length-2]
@@ -87,18 +100,25 @@ export default function Details({ allData, setAllData }) {
           return;
         }
         const response = await getEvalData(false, currentUrl);
-
-        if (url !== "html") {
-          localStorage.setItem("evaluation", JSON.stringify(response.data));
-          localStorage.setItem("evaluationUrl", currentUrl);
+        if(response.data.success !== 1 && !response.result) {
+          setError(t("MISC.unexpected_error"))
+          setLoadingProgress(false);
+        } else {
+          if (url !== "html") {
+            const compressedData = LZString.compressToUTF16(JSON.stringify(response.data));
+            localStorage.setItem("evaluation", compressedData);
+            localStorage.setItem("evaluationUrl", currentUrl);
+          }
+          
+          tot2 = response?.data?.result?.data.tot;
+          setAllData(response.data?.result?.data);
+          getDetailsData(response.data?.result?.data);
+          setLoadingProgress(false);
         }
-        
-        tot2 = response?.data?.result?.data.tot;
-        setAllData(response.data?.result?.data);
-        getDetailsData(response.data?.result?.data);
-        setLoadingProgress(false);
       } catch (error) {
+        console.error("Erro", error);
         setLoadingProgress(false);
+        setError(t("MISC.unexpected_error"))
       }
     };
 
@@ -143,7 +163,7 @@ export default function Details({ allData, setAllData }) {
             <LoadingComponent loadingText={t("MISC.loading")} darkTheme={theme} />
           </section>
         ) : 
-          <>
+        !error ? <>
             <div className="bg-white show_details">
               <div className="d-flex flex-row justify-content-between align-items-center show_details-container">
                 <div className="d-flex flex-row align-items-center">
@@ -167,7 +187,7 @@ export default function Details({ allData, setAllData }) {
             <div className="tabContent_container-details">
               <TableDetails data={dataTable?.elements} />
             </div>
-          </>
+          </> : <h3>{error}</h3>
         }
       </div>
     </>

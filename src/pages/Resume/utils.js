@@ -23,7 +23,7 @@ export function refWebsiteTecnique(ref) {
   return "https://www.w3.org/WAI/WCAG21/Techniques/" + path + ref + ".html";
 }
 
-export function testView(ele, txt, test, color, tot) {
+export function testView(ele, txt, test, color, tot, url) {
   const item = {};
 
   item["txt"] = txt;
@@ -36,7 +36,7 @@ export function testView(ele, txt, test, color, tot) {
   if (ele === "w3cValidatorErrors") {
     item["html_validator"] = true;
     item["ele"] =
-      "https://validator.w3.org/nu/?doc=" + encodeURIComponent(this.url);
+      "https://validator.w3.org/nu/?doc=" + encodeURIComponent(url);
   } else if (tot || tot > 0) {
     item["ele"] = ele;
 

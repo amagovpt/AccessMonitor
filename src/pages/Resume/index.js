@@ -14,6 +14,8 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { optionForAccordion, callbackImgT } from "./utils";
 import "./styles.css";
 
+import LZString from 'lz-string';
+
 import { pathURL } from "../../App";
 
 export let tot;
@@ -23,8 +25,10 @@ export default function Resume({ setAllData, setEle }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [dataProcess, setDataProcess] = useState([]);
   const [loadingProgress, setLoadingProgress] = useState(true);
+  const [error, setError] = useState(false);
+
+  const [dataProcess, setDataProcess] = useState([]);
   const [originalData, setOriginalData] = useState([]);
   const [pageCode, setPageCode] = useState();
   const contentHtml = location.state?.contentHtml || null;
@@ -38,15 +42,15 @@ export default function Resume({ setAllData, setEle }) {
       setLoadingProgress(true);
 
       try {
-        const storedData = localStorage.getItem("evaluation");
-        const storedUrl = localStorage.getItem("evaluationUrl");
-
+        const compressedData = localStorage.getItem("evaluation");
+        const type = localStorage.getItem("evaluationType");
+        const storedData = LZString.decompressFromUTF16(compressedData);
+        const storedUrl = type === "html" ? LZString.decompressFromUTF16(localStorage.getItem("evaluationHtml")) : localStorage.getItem("evaluationUrl");
         const currentUrl = content === "html" ? contentHtml : content;
-
         if (storedData && storedUrl === currentUrl) {
           const parsedStoredData = JSON.parse(storedData);
           setOriginalData(parsedStoredData);
-          setDataProcess(processData(parsedStoredData?.result?.data?.tot));
+          setDataProcess(processData(parsedStoredData?.result?.data?.tot, currentUrl));
           setPageCode(parsedStoredData?.result?.pagecode || "html");
           setLoadingProgress(false);
 
@@ -56,23 +60,31 @@ export default function Resume({ setAllData, setEle }) {
         }
         
         const response = await getEvalData(content, currentUrl);
-
-
-        if (content !== "html") {
-          localStorage.setItem("evaluation", JSON.stringify(response.data));
-          localStorage.setItem("evaluationUrl", currentUrl);
+        if(response.data.success !== 1 && !response.result) {
+          setError(t("MISC.unexpected_error"))
+          setLoadingProgress(false);
+        } else {
+          const compressedData = LZString.compressToUTF16(JSON.stringify(response.data));
+          localStorage.setItem("evaluation", compressedData);
+          localStorage.setItem("evaluationType", content);
+          if (content !== "html") {
+            localStorage.setItem("evaluationUrl", currentUrl);
+          } else {
+            const compressedHTML = LZString.compressToUTF16(response.data.result?.pagecode);
+            localStorage.setItem("evaluationHtml", compressedHTML);
+          }
+  
+          tot = response?.data?.result?.data.tot;
+  
+          setOriginalData(response.data);
+          setDataProcess(processData(response.data?.result?.data?.tot, currentUrl));
+          setPageCode(response.data?.result?.pagecode || "html");
+          setLoadingProgress(false);
         }
-
-        tot = response?.data?.result?.data.tot;
-
-        setOriginalData(response.data);
-        setDataProcess(processData(response.data?.result?.data?.tot));
-        setPageCode(response.data?.result?.pagecode || "html");
-        setLoadingProgress(false);
       } catch (error) {
         console.error("Erro", error);
         setLoadingProgress(false);
-        navigate(`${pathURL}error`)
+        setError(t("MISC.unexpected_error"))
       }
     };
 
@@ -117,10 +129,24 @@ export default function Resume({ setAllData, setEle }) {
 
     if (type === "") {
       const content = "html";
-      navigate(`${pathURL}results/${content}/${ele}`);
+      if(ele.startsWith('http://') || ele.startsWith('https://')) {
+        console.log("é URL")
+        window.open(ele, '_blank');
+      } else {
+        navigate(`${pathURL}results/${content}/${ele}`, {
+          state: {
+            contentHtml: pageCode,
+          },
+        });
+      }
     } else {
-      const encodedURL = encodeURIComponent(allData?.rawUrl);
-      navigate(`${pathURL}results/${encodedURL}/${ele}`);
+      if(ele.startsWith('http://') || ele.startsWith('https://')) {
+        console.log("é URL")
+        window.open(ele, '_blank');
+      } else {
+        const encodedURL = encodeURIComponent(allData?.rawUrl);
+        navigate(`${pathURL}results/${encodedURL}/${ele}`);
+      }
     }
   }
 
@@ -156,16 +182,16 @@ export default function Resume({ setAllData, setEle }) {
             <LoadingComponent loadingText={t("MISC.loading")} darkTheme={theme} />
           </section>
         ) : (
-          <ButtonsActions
+          !error ? <ButtonsActions
             reRequest={reRequest}
             seeCode={seeCode}
             downloadCSV={() => downloadCSV(dataProcess, originalData, t)}
             href={dataProcess?.metadata?.url}
             themeClass={themeClass}
-          />
+          /> : <h3>{error}</h3>
         )}
       </div>
-      {!loadingProgress && (
+      {!loadingProgress && !error && (
         <>
           <section className="sumary_container bg-white">
             <h2>{t("RESULTS.summary.title")}</h2>

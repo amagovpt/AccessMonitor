@@ -7,7 +7,7 @@ import { refWebsite, testView } from "../pages/Resume/utils";
 
 import { convertBytes } from "../utils/utils";
 
-export function processData(tot) {
+export function processData(tot, url) {
   if (tot === null || tot === undefined) {
     return null;
   }
@@ -120,7 +120,7 @@ export function processData(tot) {
           }
         }
 
-        result["tech_list"] = testView(tes, tes, tes, color, tnum);
+        result["tech_list"] = testView(tes, tes, tes, color, tnum, url);
         datax["results"].push(result);
       }
     }

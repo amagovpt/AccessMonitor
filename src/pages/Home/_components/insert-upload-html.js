@@ -27,7 +27,7 @@ export function InsertHtmlUpload() {
   const handleChange = async (event) => {
     const file = event.target.files[0];
 
-    if (file.type === "text/html") {
+    if (file && file.type === "text/html") {
       const reader = new FileReader();
       reader.onload = async () => {
         const html = reader.result;
@@ -58,13 +58,13 @@ export function InsertHtmlUpload() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor={t("HOME_PAGE.file_label")} className="margin-bottom upload_label">{t("HOME_PAGE.file_title")}</label>
+      <label htmlFor={"escrever_ficheiro"} className="margin-bottom upload_label">{t("HOME_PAGE.file_title")}</label>
       <div className="input-group mb-3 d-flex justify-content-start align-items-start">
         <button className="btn" type="button" onClick={handleButtonClick}>
           {t("HOME_PAGE.file_label")}
         </button>
         <input
-          id={t("HOME_PAGE.file_label")}
+          id={"escrever_ficheiro"}
           ref={fileInputRef}
           type="file"
           className="form-control"

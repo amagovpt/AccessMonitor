@@ -5,7 +5,7 @@
 .validator_container {
   padding: 62px 60px;
   display: grid;
-  grid-template-columns: 55% 45%;
+  grid-template-columns: 70% 30%;
 }
 
 .validator_container_description {
@@ -15,7 +15,7 @@
 }
 
 .validator_container .right_container {
-  place-content: flex-start center;
+  place-content: flex-end;
 }
 
 .verify_img {

@@ -320,6 +320,8 @@
       "metaRedir": "<code>meta</code> element to redirect users",
       "hxHasAName": "Headings with accessible name",
       "hxWithoutAName": "Headings without accessible name",
+      "onlyOneh1": "Only one <code>h1</code> element",
+      "notOneh1": "Zero or more than one <code>h1</code> element",
       "ariaCntxRole": "Elements inside required context role",
       "ariaReqElem": "Elements own required elements",
       "ariaStValid": "Values of ARIA states and properties are of valid type",
@@ -742,6 +744,14 @@
       "heading_02": {
         "s": "I have identified <mark>{{value}}</mark> heading without an accessible name.",
         "p": "I have identified <mark>{{value}}</mark> headings without an accessible name."
+      },
+      "heading_03": {
+        "s": "I have identified exactly one level 1 heading.",
+        "p": "I have identified exactly one level 1 heading."
+      },
+      "heading_04": {
+        "s": "I have identified <mark>{{value}}</mark> level 1 headings. There should be one.",
+        "p": "I have identified <mark>{{value}}</mark> level 1 headings. There should be one."
       },
       "aria_01": {
         "s": "I noticed that <mark>all elements</mark> with an explicit semantic role exist inside their required contexts.",

@@ -2,12 +2,8 @@
   display: none;
 }
 
-.other button {
-  border-color: transparent;
-}
-
 @media (min-width: 320px) and (max-width: 480px) {
-  .deskGroupMobile {
+  .deskGroup {
     display: none !important;
   }
 
@@ -91,37 +87,36 @@
 
 
 /* Dark Mode */
-.dark_mode-resume .deskGroupMobile button,
-.dark_mode-resume .group_mobile button {
+.dark_mode-resume .deskGroup .ama.btn,
+.dark_mode-resume .group_mobile .ama.btn {
   background-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter);
 }
 
-.dark_mode-resume .deskGroupMobile button:not(:focus),
-.dark_mode-resume .group_mobile button:not(:focus) {
+.dark_mode-resume .deskGroup .ama.btn:not(:focus),
+.dark_mode-resume .group_mobile .ama.btn:not(:focus) {
   border-color: var(--ama-color-text-blue);
 }
 
-.dark_mode-resume .deskGroupMobile button:active,
-.dark_mode-resume .group_mobile button:active {
+.dark_mode-resume .deskGroup .ama.btn:active,
+.dark_mode-resume .group_mobile .ama.btn:active {
   background-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter) !important;
 }
 
-.dark_mode-resume .deskGroupMobile button:hover,
-.dark_mode-resume .group_mobile button:hover {
+.dark_mode-resume  .ama.btn:hover,
+.dark_mode-resume .group_mobile .ama.btn:hover {
   background-color: transparent !important;
   border-color: var(--ama-color-text-blue);
   color: var(--ama-color-text-blue);
 }
 
-.dark_mode-resume .other button {
+.dark_mode-resume .other .ama.btn {
   background-color: var(--ama-color-background-dark-lighter) !important;
-
   color: var(--ama-color-text-blue);
 }
 
-.dark_mode-resume .other button:not(:focus) {
+.dark_mode-resume .other .ama.btn:not(:focus) {
   border-color: var(--ama-color-background-dark-lighter);
 }
 
@@ -131,9 +126,13 @@
 }
 
 .dark_mode-resume .dropdown-content,
-.dark_mode-resume .other button:hover,
-.dark_mode-resume .dropdown-content li button,
+.dark_mode-resume .other .ama.btn:hover,
+.dark_mode-resume .deskGroup .other .dropdown-content li button,
 .dark_mode-resume .dropdown-content a {
   background-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter);
+}
+
+.dark_mode-resume .other .ama.btn:not(:focus) {
+  border-color: transparent;
 }

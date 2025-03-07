@@ -22,10 +22,11 @@
   width: 237px;
 }
 
-.nav-item button {
+.ama.tabs-container .nav-item button {
   width: 200px;
   min-width: 210px;
   height: 55px;
+  line-height: normal;
 }
 
 .link_breadcrumb_container .breadcrumb .breadcrumb-item:not(:first-child) {
@@ -35,6 +36,10 @@
 @media (min-width: 320px) and (max-width: 480px) {
   .link_breadcrumb_container {
     padding: 2rem 0px 1rem 0px;
+  }
+
+  .ama.tabs-container .nav-item button {
+    line-height: 2rem;
   }
 }
 
@@ -60,17 +65,17 @@
   color: var(--ama-color-background-white);
 }
 
-.main_content_home .nav-tabs {
+.main_content_home .ama.tabs-container .nav-tabs {
   background-color: var(--ama-color-background-dark-darker) !important;
   border-bottom: 0px;
 }
 
-.main_content_home .nav-item button {
+.main_content_home .ama.tabs-container .nav-item button {
   background-color: var(--ama-color-background-dark-darker) !important;
   color: var(--header-top-bar-dark-text) !important;
 }
 
-.main_content_home .nav-tabs .nav-link.active {
+.main_content_home .ama.tabs-container .nav-tabs .nav-link.active {
   border-bottom-color: var(--header-top-bar-dark-text);
 }
 
@@ -90,7 +95,6 @@
   background-color: var(--ama-color-background-dark-lighter);
   color: var(--ama-color-text-blue);
   border-color: var(--ama-color-text-blue) !important;
-  padding-top: 12px;
 }
 
 .main_content_home .input-group .btn {

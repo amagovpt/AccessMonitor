@@ -95,8 +95,11 @@ export function processData(tot, url) {
         result["ref"] = ref;
 
         result["ref_website"] = refWebsite(ref);
-        result["relation"] =
-          tests[test]["ref"].length > 3 ? "relationACT" : "relationT";
+        if (/^[A-Za-z]\d+$|^[A-Z]{4}\d+$/.test(tests[test]["ref"])) {
+          result["relation"] = "relationT"
+        } else {
+          result["relation"] = "relationACT"
+        }
         result["ref_related_sc"] = new Array();
         result["value"] = tnum;
         result["prio"] = color === "ok" ? 3 : color === "err" ? 1 : 2;
@@ -184,7 +187,7 @@ export function getTagName(element) {
   return name;
 }
 
-export function fixCode(code, tot) {
+export function fixCode(code, tot, showCode) {
   code = code.replace(/_cssrules="true"/g, "");
   code = code.replace(/_documentselector="undefined"/g, "");
 
@@ -207,34 +210,29 @@ export function fixCode(code, tot) {
     code = code.replace(code.substring(index, k), "");
     index = code.indexOf('_selector="');
   }
-
-  return fixeSrcAttribute(code, tot);
+  return showCode ? removeImgStyles(code) : code;
 }
 
 export function getElementsList(nodes, tot) {
   const elements = new Array();
   for (const node of nodes || []) {
     if (node.elements) {
-      for (const element of node.elements || []) {
-        const ele = getTagName(element);
-        elements.push({
-          ele,
-          code:
-            ele === "style"
-              ? element.attributes
-              : ele === "title"
-                ? this.evaluation.processed.metadata.title
-                : fixCode(element.htmlCode, tot),
-          showCode: ele === "style" ? undefined : fixCode(element.htmlCode, tot),
-          pointer: element.pointer,
-        });
-      }
+      const ele = getTagName(node.elements[0]);
+      elements.push({
+        ele,
+        code:
+          ele === "style"
+            ? node.elements[0].attributes
+            : fixCode(node.elements[0].htmlCode, tot),
+        showCode: ele === "style" ? undefined : fixCode(node.elements[0].htmlCode, tot, true),
+        pointer: node.elements[0].pointer,
+      });
     } else {
       const ele = getTagName(node);
       elements.push({
         ele,
         code: ele === "style" ? node.attributes : fixCode(node.htmlCode, tot),
-        showCode: ele === "style" ? undefined : fixCode(node.htmlCode, tot),
+        showCode: ele === "style" ? undefined : fixCode(node.htmlCode, tot, true),
         pointer: node.pointer,
       });
     }
@@ -302,4 +300,19 @@ function fixeSrcAttribute(code, tot) {
 
 function splice(code, idx, rem, str) {
   return code.slice(0, idx) + str + code.slice(idx + Math.abs(rem));
+}
+
+function removeImgStyles(code) {
+
+  let htmlString = code.replace(/<img[^>]*>/g, function(imgTag) {
+    // Remove style, width, and height attributes from the <img> tag
+    imgTag = imgTag.replace(/style="[^"]*"/g, '');  // Remove the style attribute
+    imgTag = imgTag.replace(/width="[^"]*"/g, '');  // Remove the width attribute
+    imgTag = imgTag.replace(/height="[^"]*"/g, ''); // Remove the height attribute
+
+    // Clean up any extra spaces that may be left behind
+    imgTag = imgTag.replace(/\s+/g, ' ').trim();
+    return imgTag;
+  });
+  return htmlString;
 }

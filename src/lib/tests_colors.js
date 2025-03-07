@@ -66,6 +66,8 @@ export default {
   frame_02: "R",
   heading_01: "G",
   heading_02: "R",
+  heading_03: "G",
+  heading_04: "R",
   headers_01: "G",
   headers_02: "R",
   hx_01a: "R",

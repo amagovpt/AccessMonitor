@@ -34,17 +34,17 @@ export default function App() {
             {/* Add a key to force remounting when the URL changes */}
             <Route
               path={`${pathURL}results/:content`}
-              element={<Resume setAllData={setAllData} setEle={setEle} key={window.location.pathname} />}
+              element={<Resume setAllData={setAllData} setEle={setEle} />}
             />
 
             <Route
               path={`${pathURL}results/:content/:details`}
-              element={<Detail setAllData={setAllData} allData={allData} key={window.location.pathname} />}
+              element={<Detail setAllData={setAllData} allData={allData} />}
             />
 
             <Route
               path={`${pathURL}results/:content/code`}
-              element={<PageCode setAllData={setAllData} setEle={setEle} key={window.location.pathname} />}
+              element={<PageCode setAllData={setAllData} setEle={setEle} />}
             />
 
             {/* Outras rotas */}

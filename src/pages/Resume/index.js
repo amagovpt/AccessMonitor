@@ -43,23 +43,24 @@ export default function Resume({ setAllData, setEle }) {
 
       const urlParams = new URLSearchParams(window.location.search);
       const forceRefresh = urlParams.get('refresh');
+      const noRefresh = urlParams.get('noRefresh');
       const currentUrl = content === "html" ? contentHtml : content;
 
       try {
         // Check for recent evaluation based on timestamp
         const evaluationTimestamp = localStorage.getItem("evaluationTimestamp");
         const currentTime = Date.now();
-        const cacheMaxAge = 1000; // 1 seconds in milliseconds
+        const cacheMaxAge = 60000; // 60 seconds in milliseconds
         const isCacheExpired = !evaluationTimestamp || (currentTime - parseInt(evaluationTimestamp)) > cacheMaxAge;
       
         // Skip localStorage check if forceRefresh parameter exists
-        if (!forceRefresh && !isCacheExpired) {
+        if (noRefresh || (!forceRefresh && !isCacheExpired)) {
           const compressedData = localStorage.getItem("evaluation");
           const type = localStorage.getItem("evaluationType");
           const storedData = LZString.decompressFromUTF16(compressedData);
           const storedUrl = type === "html" ? LZString.decompressFromUTF16(localStorage.getItem("evaluationHtml")) : localStorage.getItem("evaluationUrl");
 
-          if (storedData && storedUrl === currentUrl) {
+          if (storedData && currentUrl.startsWith(storedUrl)) {
             const parsedStoredData = JSON.parse(storedData);
             setOriginalData(parsedStoredData);
             setDataProcess(processData(parsedStoredData?.result?.data?.tot, currentUrl));

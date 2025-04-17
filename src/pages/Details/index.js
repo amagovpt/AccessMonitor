@@ -45,8 +45,9 @@ export default function Details({ allData, setAllData }) {
         },
       })
     } else {
+      const timestamp = Date.now();
       const test = location.pathname.split("/")
-      navigate(`${pathURL}results/${test[test.length-2]}`);
+      navigate(`${pathURL}results/${test[test.length-2]}?noRefresh=${timestamp}`);
     }
   };
 

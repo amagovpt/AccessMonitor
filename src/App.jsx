@@ -21,10 +21,8 @@ export const pathURL = process.env.REACT_APP_DEV_SERVER_URL;
 //export const pathURL = process.env.REACT_APP_PRD_SERVER_URL;
 
 export default function App() {
-  // Remove the state from the App component level
-  // This is storing data across page visits
-  // const [allData, setAllData] = useState([]);
-  // const [setEle] = useState([]);
+  const [allData, setAllData] = useState([]);
+  const [setEle] = useState([]);
 
   return (
     <ThemeProvider>
@@ -36,17 +34,17 @@ export default function App() {
             {/* Add a key to force remounting when the URL changes */}
             <Route
               path={`${pathURL}results/:content`}
-              element={<Resume key={window.location.pathname} />}
+              element={<Resume setAllData={setAllData} setEle={setEle} key={window.location.pathname} />}
             />
 
             <Route
               path={`${pathURL}results/:content/:details`}
-              element={<Detail key={window.location.pathname} />}
+              element={<Detail setAllData={setAllData} allData={allData} key={window.location.pathname} />}
             />
 
             <Route
               path={`${pathURL}results/:content/code`}
-              element={<PageCode key={window.location.pathname} />}
+              element={<PageCode setAllData={setAllData} setEle={setEle} key={window.location.pathname} />}
             />
 
             {/* Outras rotas */}

@@ -1,6 +1,6 @@
 export function refWebsite(ref) {
   let result;
-  if (ref.length > 3) {
+  if (!(/^[A-Za-z]\d+$|^[A-Z]{4}\d+$/.test(ref))) {
     result = refWebsiteACT(ref);
   } else {
     result = refWebsiteTecnique(ref);

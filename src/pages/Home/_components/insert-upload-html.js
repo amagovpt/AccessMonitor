@@ -58,19 +58,21 @@ export function InsertHtmlUpload() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor={"escrever_ficheiro"} className="margin-bottom upload_label">{t("HOME_PAGE.file_title")}</label>
-      <div className="input-group mb-3 d-flex justify-content-start align-items-start">
-        <button className="btn" type="button" onClick={handleButtonClick}>
-          {t("HOME_PAGE.file_label")}
-        </button>
-        <input
-          id={"escrever_ficheiro"}
-          ref={fileInputRef}
-          type="file"
-          className="form-control"
-          aria-label="Upload"
-          onChange={handleChange}
-        />
+      <div className="field">
+        <label htmlFor={"escrever_ficheiro"} className="margin-bottom upload_label">{t("HOME_PAGE.file_title")}</label>
+        <div className="input-group mb-3 d-flex justify-content-start align-items-start">
+          <button className="btn" type="button" onClick={handleButtonClick}>
+            {t("HOME_PAGE.file_label")}
+          </button>
+          <input
+            id={"escrever_ficheiro"}
+            ref={fileInputRef}
+            type="file"
+            className="form-control"
+            aria-label="Upload"
+            onChange={handleChange}
+          />
+        </div>
       </div>
 
       <Button

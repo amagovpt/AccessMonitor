@@ -319,6 +319,8 @@
       "metaRedir": "Elemento <code>meta</code> para redireccionar os utilizadores",
       "hxHasAName": "Cabeçalhos com nome acessível",
       "hxWithoutAName": "Cabeçalhos sem nome acessível",
+      "onlyOneh1": "Apenas um <code>h1</code> na página",
+      "notOneh1": "Zero ou mais do que um <code>h1</code> na página",
       "ariaCntxRole": "Elementos dentro do contexto obrigatório",
       "ariaReqElem": "Elementos com os filhos obrigatórios",
       "ariaStValid": "Valores de estados e propriedades ARIA de tipo válido",
@@ -741,6 +743,14 @@
       "heading_02": {
         "s": "Identifiquei <mark>{{value}}</mark> cabeçalho sem nome acessível.",
         "p": "Identifiquei <mark>{{value}}</mark> cabeçalhos sem nome acessível."
+      },
+      "heading_03": {
+        "s": "Identifiquei exatamente um cabeçalho de nível 1.",
+        "p": "Identifiquei exatamente um cabeçalho de nível 1."
+      },
+      "heading_04": {
+        "s": "Identifiquei <mark>{{value}}</mark> cabeçalhos de nível 1. Devia haver um.",
+        "p": "Identifiquei <mark>{{value}}</mark> cabeçalhos de nível 1. Devia haver um."
       },
       "aria_01": {
         "s": "Verifiquei que <mark>todos os elementos</mark> com papel semântico definido explicitamente estão dentro dos contextos obrigatórios.",

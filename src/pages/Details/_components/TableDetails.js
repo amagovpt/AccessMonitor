@@ -33,7 +33,7 @@ export function TableDetails({ data }) {
                     <dt>{t("ELEMENT_RESULTS.result.content")}</dt>
                     <dd className="mb-4">
                       <div
-                        className="img"
+                        className="big-width"
                         dangerouslySetInnerHTML={renderHTML(item.showCode)}
                       />
                     </dd>

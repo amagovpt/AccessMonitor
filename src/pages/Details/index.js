@@ -9,6 +9,7 @@ import { Breadcrumb, Icon, LoadingComponent } from "ama-design-system";
 
 // Api
 import { getEvalData } from "../../config/api";
+import tests from "../../lib/tests";
 
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
@@ -49,8 +50,19 @@ export default function Details({ allData, setAllData }) {
     }
   };
 
-  const textHeading = t(`ELEMS.${details}`);
+  let resultKey = null;
+  for (const key in tests) {
+    if (tests[key].test === details) {
+      resultKey = key;
+      break;
+    }
+  }
+
+  // const textHeading = t(`ELEMS.${details}`);
   const [dataTable, setDataTable] = useState([]);
+
+  const testResultType = dataTable?.size === 1 ? "s" : "p";
+  const testResult = t(`TESTS_RESULTS.${resultKey}.${testResultType}`);
 
   const dataBreadCrumb = [
     {
@@ -63,7 +75,9 @@ export default function Details({ allData, setAllData }) {
       href: "",
     },
     {
-      title: textHeading,
+      title: <span
+        dangerouslySetInnerHTML={{ __html: testResult.replace("{{value}}", dataTable?.size) }}
+      />,
       href: "#",
     },
   ];
@@ -173,7 +187,7 @@ export default function Details({ allData, setAllData }) {
 
                   <span
                     className="textHeader ama-typography-body-large bold"
-                    dangerouslySetInnerHTML={{ __html: textHeading }}
+                    dangerouslySetInnerHTML={{ __html: testResult.replace("{{value}}", dataTable?.size) }}
                   />
                 </div>
 

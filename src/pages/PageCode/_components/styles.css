@@ -20,50 +20,50 @@
   flex-wrap: wrap;
 }
 
-.firstGroupContainer button {
+.firstGroupContainer .ama.btn {
   width: 100%;
   font-size: 13.5px;
 }
 
-.firstGroupContainer button:first-child {
+.firstGroupContainer .ama.btn:first-child {
   margin-bottom: 10px;
 }
 
 /* Dark Mode */
-.dark_mode-code button {
+.dark_mode-code .ama.btn {
   background-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter);
 }
 
-.dark_mode-code button:not(:focus) {
+.dark_mode-code .ama.btn:not(:focus) {
   border-color: var(--ama-color-text-blue);
 }
 
-.dark_mode-code button:active {
+.dark_mode-code .ama.btn:active {
   background-color: var(--ama-color-text-blue) !important;
   color: var(--ama-color-background-dark-lighter) !important;
 }
 
-.dark_mode-code button:hover {
+.dark_mode-code .ama.btn:hover {
   background-color: transparent !important;
   border-color: var(--ama-color-text-blue);
   color: var(--ama-color-text-blue);
 }
 
-.dark_mode-code button:focus {
+.dark_mode-code .ama.btn:focus {
   color: var(--ama-color-text-grey) !important;
 }
 
-.dark_mode-code .other button:focus {
+.dark_mode-code .other .ama.btn:focus {
   color: var(--ama-color-text-blue) !important;
 }
 
-.dark_mode-code .other button {
+.dark_mode-code .other .ama.btn {
   background-color: var(--ama-color-background-dark-lighter) !important;
 
   color: var(--ama-color-text-blue);
 }
 
-.dark_mode-code .other button:not(:focus) {
+.dark_mode-code .other .ama.btn:not(:focus) {
   border-color: var(--ama-color-background-dark-lighter);
 }

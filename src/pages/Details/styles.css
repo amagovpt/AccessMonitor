@@ -5,12 +5,36 @@
   border-left: 1px solid var(--ama-color-background-white);
 }
 
+mark {
+  background-color: initial;
+  font-weight: 900 !important;
+  text-decoration: underline;
+}
+
 .show_details {
   margin-bottom: 2rem;
 }
 
 .details-container .nav-tabs {
   margin-bottom: 0 !important;
+}
+
+.error-cell,
+.success-cell,
+.warning-cell {
+  font-size: 36px;
+}
+
+.warning-cell {
+  background: #ff9 !important;
+}
+
+.error-cell {
+  background: #f99 !important;
+}
+
+.success-cell {
+  background: #bce1bc !important;
 }
 
 .textHeader code {
@@ -21,7 +45,6 @@
 .tabContent_container-details {
   background: var(--ama-color-background-white);
   padding: 32px 48px;
-  overflow: auto;
 }
 
 @media (max-width: 768px) {
@@ -116,4 +139,8 @@
 
 .dark_mode-details .loading_container {
   background-color: var(--ama-color-background-dark-lighter) !important;
+}
+
+.dark_mode-details mark {
+  color: var(--ama-color-background-white);
 }

@@ -2,6 +2,8 @@ import "./styles/theme.css";
 import "./styles/fontStyle.css";
 import "./styles/main.css";
 
+import 'ama-design-system/dist/index.css';
+
 import { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

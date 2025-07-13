@@ -25,7 +25,7 @@ export function ButtonsActions({
   return (
     <>
       <div
-        className={`d-flex flex-row justify-content-between deskGroupMobile ${themeClass}`}
+        className={`d-flex flex-row justify-content-between deskGroup ${themeClass}`}
       >
         <Button
           size="md"

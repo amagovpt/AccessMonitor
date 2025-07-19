@@ -993,8 +993,8 @@
         "p": "Constatei que <mark>todos</mark> os elementos interativos têm no seu nome acessível o texto visível das etiquetas"
       },
       "label_03": {
-        "s": "Encontrei <mark>{{value}}</mark> elemento interativo que tem texto visível da sua etiqueta que não faz parte do seu nome acessível",
-        "p": "Encontrei <mark>{{value}}</mark> elementos interativos que têm texto visível das suas etiquetas que não faz parte dos seus nomes acessíveis"
+        "s": "Encontrei <mark>{{value}}</mark> elemento interativo cujo texto visível não faz parte do nome acessível computado para o elemento",
+        "p": "Encontrei <mark>{{value}}</mark> elementos interativos cujos texto visíveis não fazem parte dos nomes acessíveis computados para os elementos"
       },
       "word_01": {
         "s": "Constatei que não se usam estilos para impedir aumentar o espaçamento entre palavras",

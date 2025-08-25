@@ -33,7 +33,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
     "prop-types": "^15.8.1",
-    "webpack": "^5.90.3"
+    "webpack": "^5.94.0"
   },
   "browserslist": {
     "production": [

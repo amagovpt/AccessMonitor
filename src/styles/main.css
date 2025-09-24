@@ -18,3 +18,39 @@ div#root {
     flex-grow: 1;
     flex-direction: column;
 }
+
+/*TODO: Estilo para pular o erro de accessibilidade, remover até actualizar o design system */
+.skip-to-content-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+/* torna o link visível ao focar via teclado */
+.skip-to-content-link:focus,
+.skip-to-content-link:focus-visible {
+  left: 0;
+  z-index: 1000;
+
+  background: #0a0a0a;   
+  color: #ffffff;        
+  padding: 0.6rem 1rem;
+  font-size: 1rem;       
+  line-height: 1.2;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  outline: 3px solid #ffffff;       
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px #005fcc;   
+}
+
+/* alternativa: se o header for escuro, use fundo claro e texto escuro */
+@media (prefers-color-scheme: dark) {
+  .skip-to-content-link:focus,
+  .skip-to-content-link:focus-visible {
+    background: #ffffff;
+    color: #111111;
+    outline: 3px solid #111111;
+    box-shadow: 0 0 0 3px #7cc4ff; 
+  }
+}

@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+# AccessMonitor - the WCAG validator
+
+- AccessMonitor uses the [QualWeb's Engine for WCAG](https://qualweb.di.fc.ul.pt/evaluator/) - an engine to evaluate WCAG from W3C with [ACT Rules](https://www.w3.org/WAI/standards-guidelines/act/rules/). QualWeb has been developed by FCUL - Faculdade de Ciências da Universidade de Lisboa.
+- AccessMonitor is also available in an extension version for Browsers Chrome/Edge. See the [Chrome Web Store](https://chromewebstore.google.com/detail/accessmonitor-extension/knjdoonhhnjfmigigfgoehhihodndaii?hl=pt-PT&utm_source=ext_sidebar) or the [Git Repository of accessmonitor-ce](https://github.com/amagovpt/accessmonitor-ce).
+
+
+**Note: A informação abaixo carece de ser reescrita!**
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

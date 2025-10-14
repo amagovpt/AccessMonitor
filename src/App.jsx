@@ -16,24 +16,13 @@ import Detail from "./pages/Details";
 import PageCode from "./pages/PageCode";
 import Error from "./pages/Error";
 
- //export const pathURL = process.env.REACT_APP_DEV_SERVER_URL;
+ export const pathURL = process.env.REACT_APP_DEV_SERVER_URL;
 //export const pathURL = process.env.REACT_APP_PPR_SERVER_URL;
-export const pathURL = process.env.REACT_APP_PRD_SERVER_URL;
+//export const pathURL = process.env.REACT_APP_PRD_SERVER_URL;
 
 export default function App() {
   const [allData, setAllData] = useState([]);
   const [setEle] = useState([]);
-
-  /*TODO: Script para mudar o ano no footer  remover até actualizar o design system */
- useEffect(() => {
-    const footerEl = document.querySelector("footer .ama-typography-body");
-    if (footerEl) {
-      footerEl.textContent = footerEl.textContent.replace(
-        /\b\d{4}\b/,
-        new Date().getFullYear()
-      );
-    }
-  }, []);
 
   return (
     <ThemeProvider>

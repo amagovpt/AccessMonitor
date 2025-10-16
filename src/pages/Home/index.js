@@ -5,7 +5,7 @@ import "./styles.css";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import { Breadcrumb, Tabs } from "ama-design-system";
+import { Breadcrumb, Tabs, Icon } from "ama-design-system";
 
 import { useTranslation } from "react-i18next";
 
@@ -52,9 +52,15 @@ export default function Home({ changeState }) {
           <Breadcrumb data={breadcrumbs} darkTheme={theme} tagHere={t("HEADER.DROPDOWN.youarehere")} />
         </div>
 
+        <section className="bg-white px-5 py-2 mb-1 text-end">
+          
+<p className="p-0 m-0"><span aria-label="consulte também" role="img" style={{marginRight: "0.2em"}}>🔗</span>
+<a href="https://chromewebstore.google.com/detail/accessmonitor-extension/knjdoonhhnjfmigigfgoehhihodndaii?hl=pt-PT&utm_source=ext_sidebar">Extensão para Chrome</a> | <a href="https://amagovpt.github.io/accessmonitor-rulesets/" style={{color: "#339"}}>Testes AccessMonitor</a>.</p>
+        </section>
+    
         <section
           className={`bg-white validator_container ${main_content_home}`}
-        >
+          >
           <div className="d-flex flex-column align-items-stretch left_container">
             <div className="d-flex flex-column mb-4">
               <p className="validator_container_description">

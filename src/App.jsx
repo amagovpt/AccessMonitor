@@ -24,6 +24,17 @@ export default function App() {
   const [allData, setAllData] = useState([]);
   const [setEle] = useState([]);
 
+  /*TODO: Script para mudar o ano no footer  remover até actualizar o design system */
+ useEffect(() => {
+    const footerEl = document.querySelector("footer .ama-typography-body");
+    if (footerEl) {
+      footerEl.textContent = footerEl.textContent.replace(
+        /\b\d{4}\b/,
+        new Date().getFullYear()
+      );
+    }
+  }, []);
+    
   return (
     <ThemeProvider>
       <Router>
@@ -31,6 +42,7 @@ export default function App() {
           <Routes basename={`${pathURL}`}>
             <Route path={`${pathURL}`} element={<Home />} />
 
+            {/* Add a key to force remounting when the URL changes */}
             <Route
               path={`${pathURL}results/:content`}
               element={<Resume setAllData={setAllData} setEle={setEle} />}

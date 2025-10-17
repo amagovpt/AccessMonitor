@@ -65,10 +65,7 @@ export default function Details({ allData, setAllData }) {
   const testResult = t(`TESTS_RESULTS.${resultKey}.${testResultType}`);
 
   const dataBreadCrumb = [
-    {
-      title: "Acessibilidade.gov.pt",
-      href: "https://www.acessibilidade.gov.pt/",
-    },
+
     { title: "Access Monitor", href: `${pathURL}` },
     {
       title: url || "html",

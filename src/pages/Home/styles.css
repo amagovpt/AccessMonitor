@@ -112,7 +112,18 @@
 .main_content_home .upload_label {
   color: var(--ama-color-text-blue);
 }
+.main_dark .ama.tabs-container .nav-tabs .nav-link  {
+  color: var(--ama-color-text-blue) !important;
+}
 
+.main_dark .ama.tabs-container .nav-tabs .nav-link.active {
+  color: var(--ama-color-brand-primary) !important;
+  border-bottom-color: var(--ama-color-brand-primary) !important;
+}
+.main_dark .bg-white {
+  background-color: var(--ama-color-background-dark-lighter) !important;
+  color: var(--ama-color-text-blue) !important;
+}
 .link_breadcrumb_container .breadcrumbs.dark .breadcrumb .breadcrumb-item:not(:first-child) {
   background-image: url("/public/img/chevron-right-light.svg");
 }

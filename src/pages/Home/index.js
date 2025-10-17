@@ -33,11 +33,8 @@ export default function Home({ changeState }) {
   ];
 
   const breadcrumbs = [
-    {
-      title: "Acessibilidade.gov.pt",
-      href: "https://www.acessibilidade.gov.pt/",
-    },
-    { title: "Access Monitor", href: `${pathURL}` },
+    { title: "AccessMonitor", href: `${pathURL}` },
+    { title: "", href: "" },
   ];
 
   const { theme } = useContext(ThemeContext);
@@ -55,7 +52,7 @@ export default function Home({ changeState }) {
         <section className="bg-white px-5 py-2 mb-1 text-end">
           
 <p className="p-0 m-0"><span aria-label="consulte também" role="img" style={{marginRight: "0.2em"}}>🔗</span>
-<a href="https://chromewebstore.google.com/detail/accessmonitor-extension/knjdoonhhnjfmigigfgoehhihodndaii?hl=pt-PT&utm_source=ext_sidebar">Extensão para Chrome</a> | <a href="https://amagovpt.github.io/accessmonitor-rulesets/" style={{color: "#339"}}>Testes AccessMonitor</a>.</p>
+<a href="https://chromewebstore.google.com/detail/accessmonitor-extension/knjdoonhhnjfmigigfgoehhihodndaii?hl=pt-PT&utm_source=ext_sidebar">Extensão para Chrome</a> | <a href="https://amagovpt.github.io/accessmonitor-rulesets/">Testes AccessMonitor</a>.</p>
         </section>
     
         <section

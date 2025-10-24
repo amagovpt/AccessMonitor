@@ -243,6 +243,7 @@ export default function Resume({ setAllData, setEle }) {
               onClick={(ele) => setAllDataResult(ele, originalData?.result?.data)}
               imageTitlesCallback={(img) => callbackImgT(t, img)}
               caption={t("RESULTS.results.caption")}
+              headingLevel="h3"
               col1={t("RESULTS.results.practice")}
               col2={t("RESULTS.results.lvl")}
               col3={t("RESULTS.results.details")}

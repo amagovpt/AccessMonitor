@@ -4,7 +4,7 @@
   "homepage": "/amp",
   "private": true,
   "dependencies": {
-    "ama-design-system": "./ama-design-system-1.1.88.tgz",
+    "ama-design-system": "^1.1.88",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",

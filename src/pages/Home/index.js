@@ -33,8 +33,7 @@ export default function Home({ changeState }) {
   ];
 
   const breadcrumbs = [
-    { title: "AccessMonitor", href: `${pathURL}` },
-    { title: "", href: "" },
+    { title: "AccessMonitor" }
   ];
 
   const { theme } = useContext(ThemeContext);

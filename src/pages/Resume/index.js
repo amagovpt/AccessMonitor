@@ -169,11 +169,7 @@ export default function Resume({ setAllData, setEle }) {
   }
 
   const dataBreadCrumb = [
-    {
-      title: "Acessibilidade.gov.pt",
-      href: "https://www.acessibilidade.gov.pt/",
-    },
-    { title: "Access Monitor", href: `${pathURL}` },
+    { title: "AccessMonitor", href: `${pathURL}` },
     {
       title: dataProcess?.metadata?.url || "html",
       href: dataProcess?.metadata?.url,
@@ -267,6 +263,7 @@ export default function Resume({ setAllData, setEle }) {
               onClick={(ele) => setAllDataResult(ele, originalData?.result?.data)}
               imageTitlesCallback={(img) => callbackImgT(t, img)}
               caption={t("RESULTS.results.caption")}
+              headingLevel="h3"
               col1={t("RESULTS.results.practice")}
               col2={t("RESULTS.results.lvl")}
               col3={t("RESULTS.results.details")}

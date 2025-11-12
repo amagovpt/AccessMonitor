@@ -45,8 +45,9 @@ export default function Details({ allData, setAllData }) {
         },
       })
     } else {
+      const timestamp = Date.now();
       const test = location.pathname.split("/")
-      navigate(`${pathURL}results/${test[test.length-2]}`);
+      navigate(`${pathURL}results/${test[test.length-2]}?noRefresh=${timestamp}`);
     }
   };
 
@@ -65,10 +66,7 @@ export default function Details({ allData, setAllData }) {
   const testResult = t(`TESTS_RESULTS.${resultKey}.${testResultType}`);
 
   const dataBreadCrumb = [
-    {
-      title: "Acessibilidade.gov.pt",
-      href: "https://www.acessibilidade.gov.pt/",
-    },
+
     { title: "Access Monitor", href: `${pathURL}` },
     {
       title: url || "html",

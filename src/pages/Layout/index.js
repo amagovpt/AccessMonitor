@@ -36,6 +36,7 @@ export default function Layout({ children }) {
         changeTheme={toggleTheme}
         linkTo={`${pathURL}`}
         ariaLabel={t("HEADER.header_arial_label")}
+        altLogo={"AccessMonitor, WCAG 2.1"}
       />
       <main
         className={`main ${mainDark}`}

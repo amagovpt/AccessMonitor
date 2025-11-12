@@ -41,24 +41,39 @@ export default function Resume({ setAllData, setEle }) {
     const fetchData = async () => {
       setLoadingProgress(true);
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const forceRefresh = urlParams.get('refresh');
+      const noRefresh = urlParams.get('noRefresh');
+      const currentUrl = content === "html" ? contentHtml : content;
+
       try {
-        const compressedData = localStorage.getItem("evaluation");
-        const type = localStorage.getItem("evaluationType");
-        const storedData = LZString.decompressFromUTF16(compressedData);
-        const storedUrl = type === "html" ? LZString.decompressFromUTF16(localStorage.getItem("evaluationHtml")) : localStorage.getItem("evaluationUrl");
-        const currentUrl = content === "html" ? contentHtml : content;
-        if (storedData && storedUrl === currentUrl) {
-          const parsedStoredData = JSON.parse(storedData);
-          setOriginalData(parsedStoredData);
-          setDataProcess(processData(parsedStoredData?.result?.data?.tot, currentUrl));
-          setPageCode(parsedStoredData?.result?.pagecode || "html");
-          setLoadingProgress(false);
+        // Check for recent evaluation based on timestamp
+        const evaluationTimestamp = localStorage.getItem("evaluationTimestamp");
+        const currentTime = Date.now();
+        const cacheMaxAge = 60000; // 60 seconds in milliseconds
+        const isCacheExpired = !evaluationTimestamp || (currentTime - parseInt(evaluationTimestamp)) > cacheMaxAge;
+      
+        // Skip localStorage check if forceRefresh parameter exists
+        if (noRefresh || (!forceRefresh && !isCacheExpired)) {
+          const compressedData = localStorage.getItem("evaluation");
+          const type = localStorage.getItem("evaluationType");
+          const storedData = LZString.decompressFromUTF16(compressedData);
+          const storedUrl = type === "html" ? LZString.decompressFromUTF16(localStorage.getItem("evaluationHtml")) : localStorage.getItem("evaluationUrl");
 
-          tot = parsedStoredData?.result?.data?.tot;
+          if (storedData && currentUrl.startsWith(storedUrl)) {
+            const parsedStoredData = JSON.parse(storedData);
+            setOriginalData(parsedStoredData);
+            setDataProcess(processData(parsedStoredData?.result?.data?.tot, currentUrl));
+            setPageCode(parsedStoredData?.result?.pagecode || "html");
+            setLoadingProgress(false);
 
-          return;
+            tot = parsedStoredData?.result?.data?.tot;
+
+            return;
+          }
         }
         
+        // Fetch new data if no cache or forceRefresh is set
         const response = await getEvalData(content, currentUrl);
         if(response.data.success !== 1 && !response.result) {
           setError(t("MISC.unexpected_error"))
@@ -67,6 +82,8 @@ export default function Resume({ setAllData, setEle }) {
           const compressedData = LZString.compressToUTF16(JSON.stringify(response.data));
           localStorage.setItem("evaluation", compressedData);
           localStorage.setItem("evaluationType", content);
+          localStorage.setItem("evaluationTimestamp", currentTime.toString()); // Save timestamp
+        
           if (content !== "html") {
             localStorage.setItem("evaluationUrl", currentUrl);
           } else {
@@ -89,9 +106,11 @@ export default function Resume({ setAllData, setEle }) {
     };
 
     fetchData();
-  }, [content, contentHtml]);
+  }, [content, contentHtml, location.search]);
 
   const reRequest = () => {
+    const timestamp = Date.now();
+
     if (content === "html") {
       const currentURL = window.location.pathname + window.location.search;
 
@@ -102,13 +121,14 @@ export default function Resume({ setAllData, setEle }) {
       }
     } else {
       const encodedURL = encodeURIComponent(content);
-      const currentURL = window.location.pathname + window.location.search;
+      navigate(`${pathURL}results/${encodedURL}?refresh=${timestamp}`);
+      // const currentURL = window.location.pathname + window.location.search;
 
-      if (`${pathURL}results/${encodedURL}` === currentURL) {
-        window.location.href = currentURL;
-      } else {
-        navigate(`${pathURL}results/${encodedURL}`);
-      }
+      // if (`${pathURL}results/${encodedURL}` === currentURL) {
+      //   window.location.href = currentURL;
+      // } else {
+      //   navigate(`${pathURL}results/${encodedURL}`);
+      // }
     }
   };
 
@@ -149,11 +169,7 @@ export default function Resume({ setAllData, setEle }) {
   }
 
   const dataBreadCrumb = [
-    {
-      title: "Acessibilidade.gov.pt",
-      href: "https://www.acessibilidade.gov.pt/",
-    },
-    { title: "Access Monitor", href: `${pathURL}` },
+    { title: "AccessMonitor", href: `${pathURL}` },
     {
       title: dataProcess?.metadata?.url || "html",
       href: dataProcess?.metadata?.url,
@@ -247,6 +263,7 @@ export default function Resume({ setAllData, setEle }) {
               onClick={(ele) => setAllDataResult(ele, originalData?.result?.data)}
               imageTitlesCallback={(img) => callbackImgT(t, img)}
               caption={t("RESULTS.results.caption")}
+              headingLevel="h3"
               col1={t("RESULTS.results.practice")}
               col2={t("RESULTS.results.lvl")}
               col3={t("RESULTS.results.details")}

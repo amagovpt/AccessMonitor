@@ -16,8 +16,8 @@ import Detail from "./pages/Details";
 import PageCode from "./pages/PageCode";
 import Error from "./pages/Error";
 
- //export const pathURL = process.env.REACT_APP_DEV_SERVER_URL;
-//export const pathURL = process.env.REACT_APP_PPR_SERVER_URL;
+// export const pathURL = process.env.REACT_APP_DEV_SERVER_URL;
+// export const pathURL = process.env.REACT_APP_PPR_SERVER_URL;
 export const pathURL = process.env.REACT_APP_PRD_SERVER_URL;
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
       );
     }
   }, []);
-
+    
   return (
     <ThemeProvider>
       <Router>
@@ -42,6 +42,7 @@ export default function App() {
           <Routes basename={`${pathURL}`}>
             <Route path={`${pathURL}`} element={<Home />} />
 
+            {/* Add a key to force remounting when the URL changes */}
             <Route
               path={`${pathURL}results/:content`}
               element={<Resume setAllData={setAllData} setEle={setEle} />}

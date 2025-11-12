@@ -7,7 +7,7 @@ const baseURLPPR = process.env.REACT_APP_AMP_PPR_SERVER;
 const baseURLPRD = process.env.REACT_APP_AMP_PRD_SERVER;
 
 export const api = axios.create({
-  baseURL: baseURLPRD,
+  baseURL: baseURLPPR,
 });
 
 export const getEvalData = async (content, currentURL) => {

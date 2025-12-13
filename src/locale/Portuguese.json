@@ -476,6 +476,10 @@
         "s": "Encontrei <mark>{{value}}</mark> caso de links adjacentes a apontar para o mesmo destino.",
         "p": "Encontrei <mark>{{value}}</mark> casos de links adjacentes a apontar para o mesmo destino."
       },
+      "a_07": {
+        "s": "Encontrei <mark>{{value}}</mark> caso de links adjacentes que não estão dentro de um elemento <code>nav</code>.",
+        "p": "Encontrei <mark>{{value}}</mark> casos de links adjacentes que não estão dentro de um elemento <code>nav</code>."
+      },
       "a_01a": {
         "s": "Constatei que o primeiro link da página nos <mark>permite saltar</mark> para o conteúdo principal.",
         "p": "Constatei que o primeiro link da página nos <mark>permite saltar</mark> para o conteúdo principal."
@@ -1188,7 +1192,8 @@
       "9e45ec": "Espaçamento de palavras nos atributos de estilo não é !important",
       "59br37": "Nó de texto ampliado não é cortado por CSS <code>overflow</code>",
       "ARIA11": "Usar landmarks ARIA para identificar regiões da página",
-      "H40": "Usar listas de descrição"
+      "H40": "Usar listas de descrição",
+      "H97": "Agrupar links relacionados utilizando o elemento nav"
     },
     "TXT_TECHNIQUES": {
       "H37": "<p>Verifique se o equivalente alternativo em texto existente nas imagens serve informação ou função igual à desempenhada pela imagem na página.</p>",
@@ -1281,7 +1286,8 @@
       "9e45ec": "<p>Um espaçamento entre palavras igual ou superior a 0,16 vezes o tamanho da fonte é importante para garantir que todos os utilizadores conseguem ler o texto. Os estilos CSS não devem impedir que os utilizadores aumentem o espaçamento entre palavras se assim o entenderem.</p>",
       "59br37": "<p>Ao ampliar a página a dimensão relativa do texto e dos seus contentores pode mudar o que faz com que estes possam necessitar de mais espaço para apresentar o mesmo texto. A propriedade CSS <code>overflow</code> determina como os contentores se ajustam. Alguns dos seus valores podem resultar no texto ser cortado.</p>",
       "ARIA11": "<p>Garanta que só há um elemento com a semântica de main na página. Elementos com esta semântica designam a parte principal da página e permitem que utilizadores de leitor de ecrã naveguem rapidamente para essa parte da página. Cada página só deve ter um conteúdo principal, independentemente de ser especificado usando HTML5 ou ARIA.</p>",
-      "H40": "<p>Se uma lista de descrições conter elementos que não são itens da lista, ou se a ordem dos elementos não estiver correta, isto é, os elementos <dt> precederem os elementos <dd>, a lista estará mal formatada, e tecnologias de apoio não serão capazes de a apresentar corretamente.</p>"
+      "H40": "<p>Se uma lista de descrições conter elementos que não são itens da lista, ou se a ordem dos elementos não estiver correta, isto é, os elementos <dt> precederem os elementos <dd>, a lista estará mal formatada, e tecnologias de apoio não serão capazes de a apresentar corretamente.</p>",
+      "H97": "<p>O elemento <code>&lt;nav&gt;</code> é usado para agrupar links de navegação relacionados. Verifique se os links que identifiquei como relacionados estão agrupados dentro de um elemento <code>&lt;nav&gt;</code>.</p>"
     },
     "TECHFAIL": {
       "relationF": "Esta falha WCAG 2.1 está relacionada com:",

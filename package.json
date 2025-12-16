@@ -1,7 +1,7 @@
 {
   "name": "acess-monitor-plus",
   "version": "1.1.1",
-  "homepage": "/",
+  "homepage": "/amp",
   "private": true,
   "dependencies": {
     "ama-design-system": "^1.1.88",

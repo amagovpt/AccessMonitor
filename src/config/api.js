@@ -5,7 +5,7 @@ import dataJSON from '../utils/data.json'
 const baseURLEnv = process.env.REACT_APP_AMP_SERVER;
 
 export const api = axios.create({
-  baseURL: baseURLEnv,
+  baseURL: baseURLPPR,
 });
 
 export const getEvalData = async (content, currentURL) => {

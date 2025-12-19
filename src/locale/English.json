@@ -477,6 +477,10 @@
         "s": "I found <mark>{{value}}</mark> set of adjacent links pointing to the same destination.",
         "p": "I found <mark>{{value}}</mark> sets of adjacent links pointing to the same destination."
       },
+      "a_07": {
+        "s": "I found <mark>{{value}}</mark> set of adjacent links which are not inside a <code>nav</code> element.",
+        "p": "I found <mark>{{value}}</mark> sets of adjacent links which are not inside a <code>nav</code> element."
+      },
       "a_01a": {
         "s": "I found that the first link of the webpage <mark>allows</mark> us to skip to the main content.",
         "p": "I found that the first link of the webpage <mark>allows</mark> us to skip to the main content."
@@ -1189,7 +1193,8 @@
       "9e45ec": "Word spacing in style attributes is not !important",
       "59br37": "Zoomed text node is not clipped with CSS <code>overflow</code>",
       "ARIA11": "Using ARIA landmarks to identify regions of a page",
-      "H40": "Using description lists"
+      "H40": "Using description lists",
+      "H97": "Grouping related links using the nav element"
     },
     "TXT_TECHNIQUES": {
       "H37": "<p>Check if the alternative text equivalent found in the images provides equal information or function as the one performed by the image on the page.</p>",
@@ -1282,7 +1287,8 @@
       "9e45ec": "<p>A word spacing equal to or larger than 0.16 times the font size is important to ensure that all users are able to read the text. CSS styles should not prevent users from increasing the word spacing if they so desire.</p>",
       "59br37": "<p>When zooming on a page, the relative size of text and respective container might change, resulting in extra space being needed to present the same text. The CSS property <code>overflow</code> determines how the containers adjust when zooming. Some of its values might result in text clipping.</p>",
       "ARIA11": "<p>Ensure that there is only one main landmark in the page. Main landmarks designate the main content of the page and make it easy for screen reader users to quickly navigate to it. Each page should only have one main content, irrespectively of it being designated using HTML5 or ARIA.</p>",
-      "H40": "<p>If description lists contain non list item elements, or if the order of the list item elements is not appropriate, that is, <dt> elements should precede <dd> elements, the list will be incorrectly marked up, and assistive technologies will not be able to render it correctly.</p>"
+      "H40": "<p>If description lists contain non list item elements, or if the order of the list item elements is not appropriate, that is, <dt> elements should precede <dd> elements, the list will be incorrectly marked up, and assistive technologies will not be able to render it correctly.</p>",
+      "H97": "<p>The <code>&lt;nav&gt;</code> element is used to group a set of navigation links. If there are multiple groups of navigation links on a page, each group should be marked up using a separate <code>&lt;nav&gt;</code> element.</p>"
     },
     "TECHFAIL": {
       "relationF": "This WCAG 2.1 failure is related to:",

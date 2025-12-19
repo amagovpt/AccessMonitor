@@ -34,7 +34,7 @@ export default function App() {
       );
     }
   }, []);
-
+    
   return (
     <ThemeProvider>
       <Router>
@@ -42,6 +42,7 @@ export default function App() {
           <Routes basename={`${pathURL}`}>
             <Route path={`${pathURL}`} element={<Home />} />
 
+            {/* Add a key to force remounting when the URL changes */}
             <Route
               path={`${pathURL}results/:content`}
               element={<Resume setAllData={setAllData} setEle={setEle} />}

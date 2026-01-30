@@ -295,6 +295,7 @@
       "valueAbsHtml": "Absolute units of measurement in (X)HTML",
       "valueRelHtml": "Relative units of measurement in (X)HTML",
       "colorContrast": "Color combinations with a contrast ratio less than 4.5:1 for regular text or 3:1 for large text",
+      "colorContrastOk": "Color combinations with a contrast ratio greater than 4.5:1 for regular text or 3:1 for large text",
       "colorFgBgNo": "CSS rules in which the background color and letter color are not specified simultaneously",
       "cssBlink": "CSS property <code>text-decoration</code> with value <code>blink</code>",
       "ehandBoth": "Redundant event handlers",

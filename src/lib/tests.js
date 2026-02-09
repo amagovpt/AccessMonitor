@@ -722,6 +722,21 @@ export default {
     dis: "15113",
     result: "failed",
   },
+  color_02_b: {
+    type: "decr",
+    elem: "all",
+    test: "colorContrastOk",
+    score: 4,
+    level: "AA",
+    trust: "0.8",
+    top: 1,
+    steps: 1,
+    ref: "G145",
+    scs: "1.4.3",
+    dis: "15113",
+    result: "passed",
+
+  },
   color_01: {
     type: "true",
     elem: "all",

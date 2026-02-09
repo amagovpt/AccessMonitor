@@ -20,8 +20,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": " env-cmd -f .env.dev react-scripts start",
+    "start:noenv": "react-scripts start",
+    "build:preprod": "env-cmd -f .env.preprod react-scripts build",
+    "build:prod": "env-cmd -f .env.prod react-scripts build",
+    "build:noenv": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -33,6 +36,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
+    "env-cmd": "^11.0.0",
     "prop-types": "^15.8.1",
     "webpack": "^5.90.3"
   },

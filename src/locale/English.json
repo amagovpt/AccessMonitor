@@ -650,6 +650,10 @@
         "s": "I located <mark>{{value}}</mark> color combination for which the contrast ratio is lower than the minimum contrast ratio allowed by the WCAG, which is 3 to 1 for larger font text and 4.5 to 1 for regular font text.",
         "p": "I located <mark>{{value}}</mark> color combinations for which the contrast ratio is lower than the minimum contrast ratio allowed by the WCAG, which is 3 to 1 for larger font text and 4.5 to 1 for regular font text."
       },
+      "color_02_b": {
+        "s": "I located <mark>{{value}}</mark> color combination for which the contrast ratio complies with the minimum contrast ratio allowed by the WCAG, which is 3 to 1 for larger font text and 4.5 to 1 for regular font text.",
+        "p": "I located <mark>{{value}}</mark> color combinations for which the contrast ratio complies with the minimum contrast ratio allowed by the WCAG, which is 3 to 1 for larger font text and 4.5 to 1 for regular font text."
+      },
       "color_01": {
         "s": "I identified <mark>{{value}}</mark> CSS rule that does not specify either the font color or the background color.",
         "p": "I identified <mark>{{value}}</mark> CSS rules that do not specify either the font color or the background color."

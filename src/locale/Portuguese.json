@@ -649,6 +649,10 @@
         "s": "Localizei <mark>{{value}}</mark> combinação de cor cuja relação de contraste é inferior ao rácio mínimo de contraste permitido pelas WCAG, ou seja 3 para 1 para texto com letra grande e 4,5 para 1 para texto com letra normal.",
         "p": "Localizei <mark>{{value}}</mark> combinações de cor cuja relação de contraste é inferior ao rácio mínimo de contraste permitido pelas WCAG, ou seja 3 para 1 para texto com letra grande e 4,5 para 1 para texto com letra normal."
       },
+      "color_02_b": {
+        "s": "Localizei <mark>{{value}}</mark> combinação de cores cujo rácio de contraste cumpre o rácio de contraste mínimo permitido pelas WCAG, que é de 3:1 para texto com tipos de letra maiores e de 4,5:1 para texto com tipos de letra normais.",
+        "p": "Localizei <mark>{{value}}</mark> combinações de cores cujos rácios de contraste cumprem o rácio de contraste mínimo permitido pelas WCAG, que é de 3:1 para texto com tipos de letra maiores e de 4,5:1 para texto com tipos de letra normais."
+}     ,
       "color_01": {
         "s": "Identifiquei <mark>{{value}}</mark> regra de CSS em que não se especifica a cor da letra ou a cor do fundo.",
         "p": "Identifiquei <mark>{{value}}</mark> regras de CSS em que não se especifica a cor da letra ou a cor do fundo."

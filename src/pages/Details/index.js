@@ -59,7 +59,7 @@ export default function Details({ allData, setAllData }) {
     }
   }
 
-  // const textHeading = t(`ELEMS.${details}`);
+  //const textHeading = t(`ELEMS.${details}`);
   const [dataTable, setDataTable] = useState([]);
 
   const testResultType = dataTable?.size === 1 ? "s" : "p";
@@ -127,6 +127,7 @@ export default function Details({ allData, setAllData }) {
           getDetailsData(response.data?.result?.data);
           setLoadingProgress(false);
         }
+        console.log(dataTable)
       } catch (error) {
         console.error("Erro", error);
         setLoadingProgress(false);
@@ -197,7 +198,7 @@ export default function Details({ allData, setAllData }) {
             </div>
 
             <div className="tabContent_container-details">
-              <TableDetails data={dataTable?.elements} />
+              <TableDetails data={dataTable?.elements} domainUrl={url} />
             </div>
           </> : <h3>{error}</h3>
         }

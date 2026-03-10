@@ -1,8 +1,7 @@
 /* eslint-disable no-array-constructor */
 
-import scs from "../lib/scs";
-import tests from "../lib/tests";
-import tests_colors from "../lib/tests_colors";
+
+import {ruleset,testColors,successCriteria} from "@a12e/accessmonitor-rulesets";
 import { refWebsite, testView } from "../pages/Resume/utils";
 
 import { convertBytes } from "../utils/utils";
@@ -42,21 +41,21 @@ export function processData(tot, url) {
     },
   };
 
-  for (const test in tests) {
+  for (const test in ruleset) {
     if (test) {
       if (tot.results[test]) {
-        let tes = tests[test]["test"];
-        const lev = tests[test]["level"];
-        const ref = tests[test]["ref"];
-        const ele = tests[test]["elem"];
+        let tes = ruleset[test]["test"];
+        const lev = ruleset[test]["level"];
+        const ref = ruleset[test]["ref"];
+        const ele = ruleset[test]["elem"];
 
         let color;
 
-        if (tests_colors[test] === "R") {
+        if (testColors[test] === "R") {
           color = "err";
-        } else if (tests_colors[test] === "Y") {
+        } else if (testColors[test] === "Y") {
           color = "war";
-        } else if (tests_colors[test] === "G") {
+        } else if (testColors[test] === "G") {
           color = "ok";
         }
 
@@ -95,7 +94,7 @@ export function processData(tot, url) {
         result["ref"] = ref;
 
         result["ref_website"] = refWebsite(ref);
-        if (/^[A-Za-z]\d+$|^[A-Z]{4}\d+$/.test(tests[test]["ref"])) {
+        if (/^[A-Za-z]\d+$|^[A-Z]{4}\d+$/.test(ruleset[test]["ref"])) {
           result["relation"] = "relationT"
         } else {
           result["relation"] = "relationACT"
@@ -104,7 +103,7 @@ export function processData(tot, url) {
         result["value"] = tnum;
         result["prio"] = color === "ok" ? 3 : color === "err" ? 1 : 2;
 
-        const scstmp = tests[test]["scs"].split(",");
+        const scstmp = ruleset[test]["scs"];
 
         for (let s in scstmp) {
           if (s) {
@@ -112,10 +111,10 @@ export function processData(tot, url) {
             s = scstmp[s].trim();
             if (s !== "") {
               li["sc"] = s;
-              li["lvl"] = scs[s]["1"];
+              li["lvl"] = successCriteria[s].level;
               li["link"] =
                 "https://www.w3.org/WAI/WCAG21/Understanding/" +
-                scs[s]["0"] +
+                successCriteria[s].name +
                 ".html";
 
               result["ref_related_sc"].push(li);
@@ -155,10 +154,10 @@ export function getElements(allNodes, ele, tot) {
 
   let result = "G";
   const results = dataTransform?.results.map((r) => r.msg);
-  for (const test in tests || {}) {
-    const _test = tests[test];
+  for (const test in ruleset || {}) {
+    const _test = ruleset[test];
     if (_test.test === ele && results?.includes(test)) {
-      result = tests_colors[test];
+      result = testColors[test];
       break;
     }
   }

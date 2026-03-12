@@ -11,12 +11,13 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { downloadCSV } from "../../utils/utils";
 import { ThemeContext } from "../../context/ThemeContext";
-import { optionForAccordion, callbackImgT } from "./utils";
+import { optionForAccordion, callbackImgT, calculateTotalElements } from "./utils";
 import "./styles.css";
 
 import LZString from 'lz-string';
 
 import { pathURL } from "../../App";
+import { all } from "axios";
 
 export let tot;
 
@@ -31,9 +32,10 @@ export default function Resume({ setAllData, setEle }) {
   const [dataProcess, setDataProcess] = useState([]);
   const [originalData, setOriginalData] = useState([]);
   const [pageCode, setPageCode] = useState();
+  const [elementCounter,setElementCounter] = useState({});
   const contentHtml = location.state?.contentHtml || null;
   const { content } = useParams();
-
+  
   const { theme } = useContext(ThemeContext);
   const themeClass = theme === "light" ? "" : "dark_mode-resume";
 
@@ -92,7 +94,7 @@ export default function Resume({ setAllData, setEle }) {
           }
   
           tot = response?.data?.result?.data.tot;
-  
+          setElementCounter(calculateTotalElements(tot.info.cTags));
           setOriginalData(response.data);
           setDataProcess(processData(response.data?.result?.data?.tot, currentUrl));
           setPageCode(response.data?.result?.pagecode || "html");
@@ -233,7 +235,7 @@ export default function Resume({ setAllData, setEle }) {
             <div className="d-flex flex-row justify-content-between size_and_table_container">
               <div className="size_container d-flex flex-column gap-4">
                 <div className="d-flex flex-column">
-                  <span>{dataProcess?.metadata?.n_elements}</span>
+                  <span>{elementCounter}</span>
                   <span>{t("RESULTS.summary.metadata.n_elements_label")}</span>
                 </div>
 

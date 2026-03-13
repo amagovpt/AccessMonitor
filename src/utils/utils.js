@@ -1,4 +1,4 @@
-import tests from "./../lib/tests";
+import {ruleset} from "@a12e/accessmonitor-rulesets";
 import { saveAs } from "file-saver";
 
 export function validateURL(url) {
@@ -73,7 +73,7 @@ export function downloadCSV(dataProcess, originalData, t) {
         "TESTS_RESULTS." +
         dataProcess["results"][row]["msg"] +
         (num === 1 ? ".s" : ".p");
-      sc = tests[dataProcess["results"][row]["msg"]]["scs"];
+      sc = ruleset[dataProcess["results"][row]["msg"]]["scs"];
       sc = sc.replace(/,/g, " ");
 
       descs.push(desc, error);

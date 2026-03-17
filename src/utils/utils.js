@@ -73,8 +73,7 @@ export function downloadCSV(dataProcess, originalData, t) {
         "TESTS_RESULTS." +
         dataProcess["results"][row]["msg"] +
         (num === 1 ? ".s" : ".p");
-      sc = ruleset[dataProcess["results"][row]["msg"]]["scs"];
-      sc = sc.replace(/,/g, " ");
+      sc = ruleset[dataProcess["results"][row]["msg"]]?.["scs"]?.join(" ") || "";
 
       descs.push(desc, error);
       rowData.push(

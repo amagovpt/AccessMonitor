@@ -52,6 +52,8 @@ export default function Details({ allData, setAllData }) {
 
   let resultKey = null;
   for (const key in ruleset) {
+    if(!ruleset[key]) continue;
+    
     if (ruleset[key].test === details) {
       resultKey = key;
       break;

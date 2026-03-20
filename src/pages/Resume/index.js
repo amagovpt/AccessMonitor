@@ -17,7 +17,6 @@ import "./styles.css";
 import LZString from 'lz-string';
 
 import { pathURL } from "../../App";
-import { all } from "axios";
 
 export let tot;
 
@@ -35,7 +34,7 @@ export default function Resume({ setAllData, setEle }) {
   const [elementCounter,setElementCounter] = useState({});
   const contentHtml = location.state?.contentHtml || null;
   const { content } = useParams();
-  
+
   const { theme } = useContext(ThemeContext);
   const themeClass = theme === "light" ? "" : "dark_mode-resume";
 
@@ -70,6 +69,7 @@ export default function Resume({ setAllData, setEle }) {
             setLoadingProgress(false);
 
             tot = parsedStoredData?.result?.data?.tot;
+            setElementCounter(calculateTotalElements(tot.info.cTags));
 
             return;
           }
@@ -235,7 +235,7 @@ export default function Resume({ setAllData, setEle }) {
             <div className="d-flex flex-row justify-content-between size_and_table_container">
               <div className="size_container d-flex flex-column gap-4">
                 <div className="d-flex flex-column">
-                  <span>{elementCounter}</span>
+                  <span>{elementCounter || ''}</span>
                   <span>{t("RESULTS.summary.metadata.n_elements_label")}</span>
                 </div>
 

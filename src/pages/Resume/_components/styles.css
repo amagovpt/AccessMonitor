@@ -84,6 +84,9 @@
 .dropdown-content button span:hover {
   text-decoration: underline;
 }
+.open-webpage-text {
+  color: white !important;
+}
 
 
 /* Dark Mode */

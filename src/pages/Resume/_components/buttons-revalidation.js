@@ -70,7 +70,7 @@ export function ButtonsActions({
                 </li>
                 <li>
                   <a href={href} rel="noreferrer">
-                    <span>{t("RESULTS.actions.open_webpage")}</span>
+                    <span className="open-webpage-text">{t("RESULTS.actions.open_webpage")}</span>
                     <Icon name="AMA-Externo-Line" />
                   </a>
                 </li>

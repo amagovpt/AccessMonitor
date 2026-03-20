@@ -203,3 +203,15 @@ export function optionForAccordion(t, data) {
 export function callbackImgT(t, img) {
   return t(`RESULTS.results.image_title.${img}`)
 }
+
+export const calculateTotalElements = (elementCount) => {
+  if (!elementCount || typeof elementCount !== 'object') {
+    return 0;
+  }
+
+    return Object.values(elementCount).reduce((total, count) => {
+    const num = Number(count);
+    return total + (isNaN(num) ? 0 : num);
+  }, 0);
+  
+};

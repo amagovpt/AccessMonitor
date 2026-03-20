@@ -302,7 +302,7 @@ function splice(code, idx, rem, str) {
 }
 
 function removeImgStyles(code) {
-
+  if (code == null || typeof code !== "string") return code;
   let htmlString = code.replace(/<img[^>]*>/g, function(imgTag) {
     // Remove style, width, and height attributes from the <img> tag
     imgTag = imgTag.replace(/style="[^"]*"/g, '');  // Remove the style attribute

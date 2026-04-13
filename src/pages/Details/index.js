@@ -9,8 +9,7 @@ import { Breadcrumb, Icon, LoadingComponent } from "ama-design-system";
 
 // Api
 import { getEvalData } from "../../config/api";
-import tests from "../../lib/tests";
-
+import { ruleset } from "@a12e/accessmonitor-rulesets";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 import { tot } from '../Resume'
@@ -52,14 +51,16 @@ export default function Details({ allData, setAllData }) {
   };
 
   let resultKey = null;
-  for (const key in tests) {
-    if (tests[key].test === details) {
+  for (const key in ruleset) {
+    if(!ruleset[key]) continue;
+    
+    if (ruleset[key].test === details) {
       resultKey = key;
       break;
     }
   }
 
-  // const textHeading = t(`ELEMS.${details}`);
+  //const textHeading = t(`ELEMS.${details}`);
   const [dataTable, setDataTable] = useState([]);
 
   const testResultType = dataTable?.size === 1 ? "s" : "p";
@@ -127,6 +128,7 @@ export default function Details({ allData, setAllData }) {
           getDetailsData(response.data?.result?.data);
           setLoadingProgress(false);
         }
+        console.log(dataTable)
       } catch (error) {
         console.error("Erro", error);
         setLoadingProgress(false);
@@ -197,7 +199,7 @@ export default function Details({ allData, setAllData }) {
             </div>
 
             <div className="tabContent_container-details">
-              <TableDetails data={dataTable?.elements} />
+              <TableDetails data={dataTable?.elements} domainUrl={url} />
             </div>
           </> : <h3>{error}</h3>
         }

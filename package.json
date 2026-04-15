@@ -4,7 +4,7 @@
   "homepage": "/amp",
   "private": true,
   "dependencies": {
-    "@a12e/accessmonitor-rulesets": "^1.0.3",
+    "@a12e/accessmonitor-rulesets": "1.0.4",
     "ama-design-system": "^1.1.88",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",

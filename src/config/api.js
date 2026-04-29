@@ -2,27 +2,31 @@ import axios from "axios";
 
 import dataJSON from '../utils/data.json'
 
-const baseURLDEV = process.env.REACT_APP_AMP_DEV_SERVER;
-const baseURLPPR = process.env.REACT_APP_AMP_PPR_SERVER;
-const baseURLPRD = process.env.REACT_APP_AMP_PRD_SERVER;
+const baseURLEnv = process.env.REACT_APP_AMP_SERVER;
 
 export const api = axios.create({
-  baseURL: baseURLPRD,
+  baseURL: baseURLEnv,
 });
 
 export const getEvalData = async (content, currentURL) => {
-  const response = await getEvalDataByAPI(content, currentURL);
-  //const response = await getEvalDataByLocal(content, currentURL);
-
-  return response;
+  if (process.env.REACT_APP_API_DATA_SOURCE === "local") {
+    return await getEvalDataByLocal(content, currentURL);
+  }
+  return await getEvalDataByAPI(content, currentURL);
 }
 
-const getEvalDataByAPI = async (content, currentURL) => {
-  const response = content === "html" ? 
-      await api.post("/eval/html", { html: currentURL })
-    : await api.get(`/eval/${encodeURIComponent(currentURL)}`);
+// TODO: SRP , cannot receive argument that can be a URL or HTML content
+const getEvalDataByAPI = async (content, currentURLorHTML) => {
+  if(content === "html") {
+   return await api.post(`/eval/html`, { html: currentURLorHTML })
+  } else {
+    const encodedURL = encondeBase64Url(currentURLorHTML);
+   return await api.get(`/eval/${encodeURIComponent(encodedURL)}`);  
+  }
+}
 
-  return response;
+function encondeBase64Url(url) {
+  return btoa(url);
 }
 
 const getEvalDataByLocal = async (content, currentURL) => {

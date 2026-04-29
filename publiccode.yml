@@ -1,0 +1,55 @@
+publiccodeYmlVersion: 0.4.0
+name: AccessMonitor
+applicationSuite: AccessMonitor is part of the Observatory Ecosystem Suite
+url: https://github.com/amagovpt/AccessMonitor
+softwareVersion: v.3.0.1
+releaseDate: 2025-07-09
+platforms:
+  - web
+categories:
+  - compliance-management
+  - productivity-suite
+  - test-management
+  - it-development
+usedBy:
+  - ARTE, I.P. - State Technological Reform Agency (Portugal), Monitoring authority of the Accessibility Directive. 
+  - The tool support the monitoring of all public administration in Portugal.
+developmentStatus: development
+softwareType: standalone/web
+description:
+  en:
+    localisedName: AccessMonitor
+    shortDescription: "AccessMonitor is an evaluation tool of the web content
+      accessibility practices according to the WCAG 2.1 of W3C "
+    longDescription: Does your website or digital service comply with European
+      Standard EN 301 549? Does it meet the accessibility standards of the
+      Accessibility Directive and the European Accessibility Act? AccessMonitor
+      provides a first look at these questions. The automatic assessment of
+      accessibility practices doesn't answer everything, but it's a good
+      starting point. More than a police officer, AccessMonitor aims to be your
+      educator of accessibility requirements. It reports errors, but also tells
+      you what it found to be well-executed and what requires manual validation.
+    features:
+      - Generates a score from 1 to 10. How much are the accessibility practices
+        found on the submitted web page worth?
+      - Generates a report containing the good and the bad practices found on
+        the submitted web page.
+      - Evaluates a web page by submitting a URL, directly entering code, or
+        uploading a file.
+      - It is also available as an extension for Chrome/Edge which allows you to
+        perform evaluations even on pages under login.
+      - Evaluates WCAG 2.1 standard (includes all ACT Rules).
+legal:
+  license: MIT
+maintenance:
+  type: contract
+  contractors:
+    - name: FCUL - Science Faculty of Lisbon University
+      until: 2025-07-31
+      email: caduarte@edu.ulisboa.pt
+      website: https://ciencias.ulisboa.pt
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - en-150
+    - pt-PT

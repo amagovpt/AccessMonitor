@@ -16,12 +16,13 @@ export const getEvalData = async (content, currentURL) => {
 }
 
 // TODO: SRP , cannot receive argument that can be a URL or HTML content
+// Refactor into two pure functions one for evaluation of html post and 
 const getEvalDataByAPI = async (content, currentURLorHTML) => {
   if(content === "html") {
    return await api.post(`/eval/html`, { html: currentURLorHTML })
   } else {
     const encodedURL = encondeBase64Url(currentURLorHTML);
-   return await api.get(`/eval/${encodeURIComponent(encodedURL)}`);  
+   return await api.get(`/eval/${encodedURL}`);  
   }
 }
 

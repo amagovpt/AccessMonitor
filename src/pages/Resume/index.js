@@ -64,11 +64,11 @@ export default function Resume({ setAllData, setEle }) {
           if (storedData && currentUrl.startsWith(storedUrl)) {
             const parsedStoredData = JSON.parse(storedData);
             setOriginalData(parsedStoredData);
-            setDataProcess(processData(parsedStoredData?.result?.data?.tot, currentUrl));
-            setPageCode(parsedStoredData?.result?.pagecode || "html");
+            setDataProcess(processData(parsedStoredData?.data?.tot, currentUrl));
+            setPageCode(parsedStoredData?.pagecode || "html");
             setLoadingProgress(false);
 
-            tot = parsedStoredData?.result?.data?.tot;
+            tot = parsedStoredData?.data?.tot;
             setElementCounter(calculateTotalElements(tot.info.cTags));
 
             return;
@@ -77,11 +77,12 @@ export default function Resume({ setAllData, setEle }) {
         
         // Fetch new data if no cache or forceRefresh is set
         const response = await getEvalData(content, currentUrl);
-        if(response.data.success !== 1 && !response.result) {
+        if(response.status !== 200 && !response.data) {
           setError(t("MISC.unexpected_error"))
           setLoadingProgress(false);
         } else {
-          const compressedData = LZString.compressToUTF16(JSON.stringify(response.data));
+          const evaluation = response.data?.data;
+          const compressedData = LZString.compressToUTF16(JSON.stringify(evaluation));
           localStorage.setItem("evaluation", compressedData);
           localStorage.setItem("evaluationType", content);
           localStorage.setItem("evaluationTimestamp", currentTime.toString()); // Save timestamp
@@ -89,15 +90,15 @@ export default function Resume({ setAllData, setEle }) {
           if (content !== "html") {
             localStorage.setItem("evaluationUrl", currentUrl);
           } else {
-            const compressedHTML = LZString.compressToUTF16(response.data.result?.pagecode);
+            const compressedHTML = LZString.compressToUTF16(evaluation?.pagecode);
             localStorage.setItem("evaluationHtml", compressedHTML);
           }
-  
-          tot = response?.data?.result?.data.tot;
-          setElementCounter(calculateTotalElements(tot.info.cTags));
-          setOriginalData(response.data);
-          setDataProcess(processData(response.data?.result?.data?.tot, currentUrl));
-          setPageCode(response.data?.result?.pagecode || "html");
+          console.log(evaluation)
+          tot = evaluation?.data?.tot;
+          setElementCounter(calculateTotalElements(tot?.info?.cTags));
+          setOriginalData(evaluation?.data);
+          setDataProcess(processData(evaluation?.data?.tot, currentUrl));
+          setPageCode(evaluation?.pagecode || "html");
           setLoadingProgress(false);
         }
       } catch (error) {

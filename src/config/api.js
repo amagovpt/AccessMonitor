@@ -21,14 +21,11 @@ const getEvalDataByAPI = async (content, currentURLorHTML) => {
   if(content === "html") {
    return await api.post(`/eval/html`, { html: currentURLorHTML })
   } else {
-    const encodedURL = encondeBase64Url(currentURLorHTML);
-   return await api.get(`/eval/${encodedURL}`);  
+
+   return await api.get(`/eval/${encodeURIComponent(currentURLorHTML)}`);  
   }
 }
 
-function encondeBase64Url(url) {
-  return btoa(url);
-}
 
 const getEvalDataByLocal = async (content, currentURL) => {
   const response = dataJSON

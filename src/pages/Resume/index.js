@@ -63,7 +63,7 @@ export default function Resume({ setAllData, setEle }) {
 
           if (storedData && currentUrl.startsWith(storedUrl)) {
             const parsedStoredData = JSON.parse(storedData);
-            setOriginalData(parsedStoredData);
+            setOriginalData(parsedStoredData.data);
             setDataProcess(processData(parsedStoredData?.data?.tot, currentUrl));
             setPageCode(parsedStoredData?.pagecode || "html");
             setLoadingProgress(false);
@@ -125,13 +125,7 @@ export default function Resume({ setAllData, setEle }) {
     } else {
       const encodedURL = encodeURIComponent(content);
       navigate(`${pathURL}results/${encodedURL}?refresh=${timestamp}`);
-      // const currentURL = window.location.pathname + window.location.search;
-
-      // if (`${pathURL}results/${encodedURL}` === currentURL) {
-      //   window.location.href = currentURL;
-      // } else {
-      //   navigate(`${pathURL}results/${encodedURL}`);
-      // }
+     
     }
   };
 
@@ -263,7 +257,7 @@ export default function Resume({ setAllData, setEle }) {
             <h2 className="avaliation_title mb-3">{t("RESULTS.results.title")}</h2>
             <TableComponent
               data={optionForAccordion(t, dataProcess)}
-              onClick={(ele) => setAllDataResult(ele, originalData?.result?.data)}
+              onClick={(ele) => setAllDataResult(ele, originalData)}
               imageTitlesCallback={(img) => callbackImgT(t, img)}
               caption={t("RESULTS.results.caption")}
               headingLevel="h3"

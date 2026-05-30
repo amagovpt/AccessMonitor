@@ -5,7 +5,7 @@
   "dependencies": {
     "@a12e/accessmonitor-rulesets": "1.0.4",
     "ama-design-system": "^1.1.88",
-    "axios": "^1.6.8",
+    "axios": "^1.16.0",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "file-saver": "^2.0.5",

@@ -5,7 +5,6 @@ WORKDIR /app
 
 COPY package*.json ./
 
-COPY . .
 RUN npm ci
 
 FROM base AS development
@@ -28,7 +27,7 @@ CMD [ "npm", "run", "start:noenv" ]
 
 FROM  base AS builder
 WORKDIR /app
-COPY .htaccess ./
+COPY . .
 ARG REACT_APP_BASE_URL
 ARG REACT_APP_AMP_SERVER
 ARG REACT_APP_SERVER_URL
@@ -43,9 +42,11 @@ RUN npm run build:noenv
 FROM httpd:alpine AS production
 
 RUN sed -i 's/#LoadModule rewrite_module/LoadModule rewrite_module/' /usr/local/apache2/conf/httpd.conf && \
-    sed -i 's/AllowOverride None/AllowOverride All/' /usr/local/apache2/conf/httpd.conf
+    sed -i 's/AllowOverride None/AllowOverride All/g' /usr/local/apache2/conf/httpd.conf
+RUN echo "AllowEncodedSlashes NoDecode" >> /usr/local/apache2/conf/httpd.conf
 WORKDIR /usr/local/apache2/htdocs/
 COPY --from=builder /app/build /usr/local/apache2/htdocs
 COPY --from=builder /app/.htaccess /usr/local/apache2/htdocs
+
 
 EXPOSE 80
